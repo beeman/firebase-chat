@@ -26,7 +26,6 @@ export class RoomService {
       .doc(username)
       .set(user)
       .then(res => {
-        console.log('res', res)
         window.localStorage.setItem('user', JSON.stringify(user))
         return res
       })
@@ -35,7 +34,7 @@ export class RoomService {
   constructor(private fire: AngularFirestore) {
     this._user = JSON.parse(window.localStorage.getItem('user'))
 
-    if (this._user.username) {
+    if (this._user && this._user.username) {
       this._user$ = this.fire
         .collection('Users')
         .doc(this._user.username)
